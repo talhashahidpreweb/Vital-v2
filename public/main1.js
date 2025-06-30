@@ -437,7 +437,7 @@ $(document).ready(function () {
   updateShippingDate();
   InitializeFAQ();
   initializeCountdown();
-  disableClick();
+  //disableClick();
   $(window).on('resize', function() {
     checkMobile();
     updateLogoSources();
