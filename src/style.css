@@ -120,6 +120,11 @@ body {
   gap: 60px;
 }
 
+.font-signature {
+  font-family: "Homemade Apple", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
 .marquee-item {
   color: var(--color-banner-text);
   font-weight: 600;
