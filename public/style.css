@@ -498,6 +498,9 @@
   .grid-cols-\[55\%_40\%\] {
     grid-template-columns: 55% 40%;
   }
+  .grid-cols-\[60\%_40\%\] {
+    grid-template-columns: 60% 40%;
+  }
   .grid-rows-4 {
     grid-template-rows: repeat(4, minmax(0, 1fr));
   }
@@ -962,6 +965,9 @@
   .opacity-50 {
     opacity: 50%;
   }
+  .opacity-60 {
+    opacity: 60%;
+  }
   .shadow {
     --tw-shadow: 0 1px 3px 0 var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 1px 2px -1px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
     box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
@@ -1255,6 +1261,11 @@
   .md\:grid-cols-\[45\%_45\%\] {
     @media (width >= 48rem) {
       grid-template-columns: 45% 45%;
+    }
+  }
+  .md\:grid-cols-\[60\%_40\%\] {
+    @media (width >= 48rem) {
+      grid-template-columns: 60% 40%;
     }
   }
   .md\:flex-row {
