@@ -426,6 +426,119 @@ $(document).ready(function () {
     day: '2-digit'
   }));
 }
+  //ANimated Section JS
+   const slideInterval = 3000; // 3 seconds between slides
+const fadeDuration = 1000;   // 1 second fade duration
+
+// Get all background slides
+const $slides = $('.bg-slide');
+const totalSlides = $slides.length;
+let currentIndex = 0;
+
+// Text content array for each slide
+const textContent = [
+  {
+    languageTo: "French",
+    translation1Before: "When is the best time to visit the top of the Eiffel Tower?",
+    translation1After: "Quel est le meilleur moment pour visiter le sommet de la tour Eiffel ?",
+    translation2Before: "Le matin tôt ou en soirée pour éviter la foule.",
+    translation2After: "Early morning or in the evening to avoid the crowd."
+  },
+   {
+    languageTo: "Italian",
+    translation1Before: "Are there guided tours of the Colosseum available?",
+    translation1After: "Ci sono visite guidate del Colosseo disponibili?",
+    translation2Before: "Sì, partono ogni mezz’ora vicino all’ingresso.",
+    translation2After: "Yes, they start every half hour near the entrance."
+  },
+  {
+    languageTo: "Turkish",
+    translation1Before: "Is photography allowed inside the Hagia Sophia?",
+    translation1After: "Ayasofya’nın içinde fotoğraf çekmek serbest mi?",
+    translation2Before: "Evet, ama flaş kullanmadan çekmeniz gerekiyor.",
+    translation2After: "Yes, but you need to take photos without using flash."
+  },
+  {
+    languageTo: "Egyptian",
+    translation1Before: "How long does it take to walk around the pyramids?",
+    translation1After: "المشي حوالين الأهرامات بياخد وقت قد إيه؟",
+    translation2Before: "تقريباً ساعة، بس لو حابب تدخل كمان هيطول أكتر.",
+    translation2After: "About an hour, but longer if you want to go inside too."
+  },
+ 
+];
+
+// Initialize - show first slide and set initial text
+$slides.eq(currentIndex).addClass('active');
+updateTextContent(currentIndex);
+
+// Function to update text content with animation
+function updateTextContent(index) {
+  const content = textContent[index];
+  const $textElements = $('.text-language-to, .translation-1-before, .translation-1-after, .translation-2-before, .translation-2-after');
+  
+  // Animate text out (move up and fade)
+  $textElements.css({
+    'transform': 'translateY(-20px)',
+    'opacity': '0',
+    'transition': 'all 0.3s ease-in-out'
+  });
+  
+  // After animation completes, update content and animate in
+  setTimeout(() => {
+    $('.text-language-to').text(content.languageTo);
+    $('.translation-1-before').text(content.translation1Before);
+    $('.translation-1-after').text(content.translation1After);
+    $('.translation-2-before').text(content.translation2Before);
+    $('.translation-2-after').text(content.translation2After);
+    
+    // Animate text in (move to original position and fade in)
+    $textElements.css({
+      'transform': 'translateY(0)',
+      'opacity': '1',
+      'transition': 'all 0.3s ease-in-out'
+    });
+  }, 300);
+}
+
+// Animation function
+function animateBackgrounds() {
+  // Remove active class from current slide
+  $slides.eq(currentIndex).removeClass('active');
+  
+  // Move to next slide (loop back to 0 when reaching the end)
+  currentIndex = (currentIndex + 1) % totalSlides;
+  
+  // Add active class to new slide
+  $slides.eq(currentIndex).addClass('active');
+  
+  // Update text content
+  updateTextContent(currentIndex);
+}
+
+// Start the animation interval
+setInterval(animateBackgrounds, slideInterval);
+  function updateImageSrc() {
+      $('.bg-slide').each(function() {
+        // Store the current src in data-desktop-src if not already set
+        if (!$(this).attr('data-desktop-src')) {
+          var currentSrc = $(this).attr('src');
+          $(this).attr('data-desktop-src', currentSrc);
+        }
+
+        // Check window width and update src accordingly
+        if ($(window).width() < 768) { // Example breakpoint for mobile
+          var mobileSrc = $(this).data('mobile-src');
+          $(this).attr('src', mobileSrc);
+        } else {
+          var desktopSrc = $(this).attr('data-desktop-src');
+          $(this).attr('src', desktopSrc);
+        }
+      });
+    }
+
+    // Initial call to set the correct image src
+    
   
   // Run on page load
   updateLogoSources();
@@ -438,7 +551,10 @@ $(document).ready(function () {
   InitializeFAQ();
   initializeCountdown();
   //disableClick();
+  updateImageSrc();
+
   $(window).on('resize', function() {
+   updateImageSrc();
     checkMobile();
     updateLogoSources();
     updateHeroAfterHeight();
